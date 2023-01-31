@@ -1,0 +1,66 @@
+* {
+  --background-color: black;
+  --card-background: #140E00;
+  --font-author: white;
+  --font-color: #FEF1D8;
+  --header-font: #F9C04D;
+  --font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.App {
+  text-align: center;
+  color: var(--font-color);
+  background-color: var( --background-color);
+}
+
+.App-header {
+  background-color: var( --background-color);
+  display: flex;
+  justify-content: right;
+  font-size: calc(15px + 2vmin);
+  color: var(--header-font);
+  padding: 2%;
+  font-family: var(--font-family);
+  font-weight: bold;
+}
+
+.all-posts{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card{
+  border: 2px;
+  border-style: solid;
+  border-color: var(--header-font);
+  border-radius: 5%;;
+  margin: 20px;
+  width: 40%;
+  font-family: var(--font-family);
+  padding: 2%;
+}
+
+.author{
+  text-align: left;
+  margin-left: 5%;
+  color: var(--font-author) ;
+  font-weight: bolder;
+}
+
+.post{
+  color: var(--font-color);
+}
+
+.reply{
+  text-align: left;
+  background-color: #0e0e0e;
+  color: var(--font-color);
+  padding: 3%;
+  border-radius: 5%;
+  margin: 2%;
+}
+
+button{
+  background-color: var(--header-font);
+}
