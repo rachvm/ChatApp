@@ -64,3 +64,18 @@
 button{
   background-color: var(--header-font);
 }
+
+.date{
+  text-align: end;
+  font-size: small;
+  margin: 0;
+}
+
+.addpost{
+  height:10%;
+
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
