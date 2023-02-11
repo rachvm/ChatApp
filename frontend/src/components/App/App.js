@@ -16,13 +16,13 @@ export default function App() {
     } getPost()
   }, []);
 
-  const addPost = async () => {
+  const addPost = async (post) => {
     const text = {
       name: "Daniel",
       surname: "Evans",
-      post: "Lovely to see some sunshine today",
+      post: post,
       author_id: 1,
-      created: "2/3/2023"
+      created: "2/3/2023",
      
   };
 		const response = await fetch('http://localhost:3001/api/chat', {
@@ -39,7 +39,9 @@ export default function App() {
     <div className="App">
       <header className="App-header"> GetTogether </header>
       <div className="all-posts">
-        <AddPost/>
+        <AddPost
+          handleAddPost={addPost}
+        />
         {like.map((x) => (
           <Post key={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies}/>
         ))}
