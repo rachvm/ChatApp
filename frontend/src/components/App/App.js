@@ -38,13 +38,12 @@ export default function App() {
   return (
     <div className="App">
       <header className="App-header"> GetTogether </header>
-      <button onClick={addPost}>ADDDDDDDDDDDDD</button>
-      {/* <div className="all-posts">
+      <div className="all-posts">
         <AddPost/>
         {like.map((x) => (
           <Post key={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies}/>
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }
