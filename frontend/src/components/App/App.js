@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react'
 import Post from '../Post';
 import AddPost from '../AddPost';
+import moment from 'moment';
 
 export default function App() {
   const [ like, setLike] = useState([])
@@ -17,12 +18,13 @@ export default function App() {
   }, []);
 
   const addPost = async (post) => {
+    const date = moment().format("DD-MM-YYYY")
     const text = {
       name: "Daniel",
       surname: "Evans",
       post: post,
       author_id: 1,
-      created: "2/3/2023",
+      created: date,
      
   };
 		const response = await fetch('http://localhost:3001/api/chat', {
