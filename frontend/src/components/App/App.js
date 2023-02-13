@@ -12,7 +12,6 @@ export default function App() {
       const response = await fetch('http://localhost:3001/api/chat')
       const data = await response.json()
       const allposts = data.payload
-      console.log(allposts);
       setLike(allposts)
     } getPost()
   }, []);
@@ -37,6 +36,18 @@ export default function App() {
 		setLike([...like, newpost]);
 	};
 
+  const deletePost = async (potato) => {
+    // alert("Delete" + id)
+    const id={userid: potato}
+    await fetch(`http://localhost:3001/api/chat/`, {
+      method: 'DELETE',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(id),
+		})
+    setLike(like.filter((like)=> like._id !== potato))
+  }
+
+
   return (
     <div className="App">
       <header className="App-header"> GetTogether </header>
@@ -45,7 +56,7 @@ export default function App() {
           handleAddPost={addPost}
         />
         {like.map((x) => (
-          <Post key={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies}/>
+          <Post key={x._id} postID={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost}/>
         ))}
       </div>
     </div>
