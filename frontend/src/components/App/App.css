@@ -54,7 +54,7 @@
 
 .reply{
   text-align: left;
-  background-color: darkgoldenrod;
+  background-color: rgb(73, 72, 66);
   color: var(--font-color);
   padding: 3%;
   border-radius: 5%;

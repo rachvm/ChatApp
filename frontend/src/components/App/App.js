@@ -12,7 +12,9 @@ export default function App() {
       const response = await fetch('http://localhost:3001/api/chat')
       const data = await response.json()
       const allposts = data.payload
-      setLike(allposts)
+      let sortedPosts = allposts.sort((a, b) =>
+          a.created.split('-').reverse().join().localeCompare(b.created.split('-').reverse().join()));
+      setLike(sortedPosts)
     } getPost()
   }, []);
 
