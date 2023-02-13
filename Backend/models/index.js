@@ -1,4 +1,5 @@
-import { MongoClient } from "mongodb";
+import { MongoClient } from 'mongodb';
+import { ObjectId } from 'mongodb';
 import dotenv from "dotenv";
 dotenv.config()
 
@@ -11,4 +12,19 @@ export async function getAllPosts() {
     const message = collection.find()
     const results = await message.toArray();
     return results
+}
+
+export async function addPost(postContent) {
+    const message = collection.insertOne(postContent)
+    const results = await message
+    const findId = results.insertedId
+    const newPost = await collection.findOne({_id: findId});
+    return newPost 
+}
+
+export async function deletePost(key){
+    const deleteID = Object.values(key).toString()
+    const message = collection.deleteOne({_id : ObjectId(deleteID)})
+     const results = await message;
+     return results.acknowledged;
 }
