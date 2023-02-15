@@ -1,4 +1,3 @@
-import './App.css';
 import { useEffect, useState } from 'react'
 import Post from '../Post';
 import AddPost from '../AddPost';
@@ -51,15 +50,16 @@ export default function App() {
 
 
   return (
-    <div className="App">
-      <header className="App-header"> GetTogether </header>
-      <div className="all-posts">
-        <AddPost
-          handleAddPost={addPost}
-        />
+    <div>
+      <header className="p-4 pl-4 text-right text-yellow-400 text-5xl font-bold"> GetTogether </header>
+      <div className="flex flex-col w-4/6 m-auto">
+        
+        <AddPost handleAddPost={addPost}/>
+        
         {like.map((x) => (
           <Post key={x._id} postID={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost}/>
         ))}
+
       </div>
     </div>
   );
