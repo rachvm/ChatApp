@@ -4,7 +4,7 @@ import AddPost from '../AddPost';
 import moment from 'moment';
 
 export default function App() {
-  const [ like, setLike] = useState([])
+  const [ allposts, setAllposts] = useState([])
   
   useEffect(() => {
     async function getPost () {
@@ -13,7 +13,7 @@ export default function App() {
       const allposts = data.payload
       let sortedPosts = allposts.sort((a, b) =>
           a.created.split('-').reverse().join().localeCompare(b.created.split('-').reverse().join()));
-      setLike(sortedPosts)
+      setAllposts(sortedPosts)
     } getPost()
   }, []);
 
@@ -34,20 +34,29 @@ export default function App() {
 		})
 		const data = await response.json()
     const newpost = data.payload
-		setLike([...like, newpost]);
+		setAllposts([...allposts, newpost]);
 	};
 
-  const deletePost = async (potato) => {
-    // alert("Delete" + id)
-    const id={userid: potato}
-    await fetch(`http://localhost:3001/api/chat/`, {
-      method: 'DELETE',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(id),
-		})
-    setLike(like.filter((like)=> like._id !== potato))
-  }
+  // const deletePost = async (deleteid) => {
+  //   // alert("Delete" + id)
+  //   const id={userid: deleteid}
+  //   await fetch(`http://localhost:3001/api/chat/`, {
+  //     method: 'DELETE',
+	// 		headers: {'Content-Type': 'application/json'},
+	// 		body: JSON.stringify(id),
+	// 	})
+  //   setAllposts(allposts.filter((allposts)=> allposts._id !== deleteid))
+  // }
 
+  const deletePost = async (deleteid) => {
+    // alert("Delete" + id)
+
+    await fetch(`http://localhost:3001/api/chat/${deleteid}`, {
+      method: 'DELETE',
+
+		})
+    setAllposts(allposts.filter((allposts)=> allposts._id !== deleteid))
+  }
 
   return (
     <div>
@@ -56,7 +65,7 @@ export default function App() {
         
         <AddPost handleAddPost={addPost}/>
         
-        {like.map((x) => (
+        {allposts.map((x) => (
           <Post key={x._id} postID={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost}/>
         ))}
 

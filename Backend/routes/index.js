@@ -15,8 +15,8 @@ chatRouter.post("/", async function (req, res) {
     res.json({ success: true, payload: note });
 });
 
-chatRouter.delete("/", async function (req, res) {
-    const key = (req.body)
+chatRouter.delete("/:id", async function (req, res) {
+    const key = (req.params)
     const note = await deletePost(key);
     res.json({note})
 });
