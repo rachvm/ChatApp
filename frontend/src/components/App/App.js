@@ -23,7 +23,7 @@ export default function App() {
   const addPost = async (post) => {
     const date = moment().format("DD-MM-YYYY")
     const text = {
-      name: "Daniel Evans",
+      name: "Julie Edwards",
       post: post,
       created: date,
      
@@ -38,17 +38,6 @@ export default function App() {
 		setAllposts([...allposts, newpost]);
 	};
 
-  // const deletePost = async (deleteid) => {
-  //   // alert("Delete" + id)
-  //   const id={userid: deleteid}
-  //   await fetch(`http://localhost:3001/api/chat/`, {
-  //     method: 'DELETE',
-	// 		headers: {'Content-Type': 'application/json'},
-	// 		body: JSON.stringify(id),
-	// 	})
-  //   setAllposts(allposts.filter((allposts)=> allposts._id !== deleteid))
-  // }
-
   const deletePost = async (deleteid) => {
     // alert("Delete" + id)
 
@@ -59,6 +48,33 @@ export default function App() {
     setAllposts(allposts.filter((allposts)=> allposts._id !== deleteid))
   }
 
+  const editPost = async (post, updateid) => {
+    console.log(updateid);
+    const text = {
+      post: post,
+     
+  };
+		const response = await fetch(`http://localhost:3001/api/chat/${updateid}`, {
+			method: 'PATCH',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(text),
+		})
+		const data = await response.json()
+    const newpost = data
+    console.log(newpost);
+		setAllposts([...allposts.filter(object => { return object._id !== newpost._id}), newpost])
+	};
+
+  const delReply = async (replyID) => {
+    // alert("Delete" + id)
+
+    await fetch(`http://localhost:3001/api/chat/reply/${replyID}`, {
+      method: 'DELETE',
+
+		})
+    // setAllposts(allposts.filter((allposts)=> allposts._id !== replyID))
+  }
+
   return (
     <div>
       <header className="p-4 pl-4 text-right text-yellow-400 text-5xl font-bold"> GetTogether </header>
@@ -67,7 +83,7 @@ export default function App() {
         <AddPost handleAddPost={addPost}/>
         
         {allposts.map((x) => (
-          <Post key={x._id} postID={x._id} name={x.name} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost}/>
+          <Post key={x._id} postID={x._id} name={x.name} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost} handleEditPost={editPost} handleDelReplyClick={delReply}/>
         ))}
 
       </div>

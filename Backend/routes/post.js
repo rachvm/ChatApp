@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllPosts, addPost, deletePost } from '../models/index.js';
+import { getAllPosts, addPost, deletePost, editPost } from '../models/post.js';
 
 const chatRouter = express.Router();
 export default chatRouter
@@ -21,3 +21,9 @@ chatRouter.delete("/:id", async function (req, res) {
     res.json({note})
 });
 
+chatRouter.patch("/:id", async function (req, res) {
+    const postContent = req.body
+    const key = req.params
+    const note = await editPost(postContent, key);
+    res.json(note);
+});

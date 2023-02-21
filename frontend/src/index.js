@@ -3,26 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from '../src/components/App/App.js';
 import reportWebVitals from './reportWebVitals';
-import { Auth0Provider } from '@auth0/auth0-react';
-import AuthenticationButton from './components/Signin/authbutton';
-
-const domain = process.env.REACT_APP_AUTH0_DOMAIN
-const ClientId = process.env.REACT_APP_AUTH0_CLIENT_ID
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Auth0Provider
-    domain={domain}
-    clientId={ClientId}
-    authorizationParams={{
-      redirect_uri: window.location.origin,
-      audience: `https://${domain}/api/v2/`,
-      scope: "read:current_user update:current_user_metadata"
-    }}
-  >
-  <AuthenticationButton/>
+  <React.Fragment>
     <App />
-  </Auth0Provider>,
+  </React.Fragment>
 );
 
 // If you want to start measuring performance in your app, pass a function
