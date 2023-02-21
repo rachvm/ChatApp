@@ -3,6 +3,7 @@ import Post from '../Post';
 import AddPost from '../AddPost';
 import moment from 'moment';
 
+
 export default function App() {
   const [ allposts, setAllposts] = useState([])
   
@@ -17,13 +18,13 @@ export default function App() {
     } getPost()
   }, []);
 
+
+
   const addPost = async (post) => {
     const date = moment().format("DD-MM-YYYY")
     const text = {
-      name: "Daniel",
-      surname: "Evans",
+      name: "Daniel Evans",
       post: post,
-      author_id: 1,
       created: date,
      
   };
@@ -66,7 +67,7 @@ export default function App() {
         <AddPost handleAddPost={addPost}/>
         
         {allposts.map((x) => (
-          <Post key={x._id} postID={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost}/>
+          <Post key={x._id} postID={x._id} name={x.name} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost}/>
         ))}
 
       </div>

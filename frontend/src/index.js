@@ -4,26 +4,25 @@ import './index.css';
 import App from '../src/components/App/App.js';
 import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from '@auth0/auth0-react';
-import LoginButton from './components/Signin/login';
-import LogoutButton from './components/Signin/logout';
+import AuthenticationButton from './components/Signin/authbutton';
 
-const domaina = process.env.REACT_APP_AUTH0_DOMAIN;
-const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const domain = process.env.REACT_APP_AUTH0_DOMAIN
+const ClientId = process.env.REACT_APP_AUTH0_CLIENT_ID
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Auth0Provider
-    domain={domaina}
-    clientId={clientId}
+    domain={domain}
+    clientId={ClientId}
     authorizationParams={{
-      redirect_uri: window.location.origin}}
+      redirect_uri: window.location.origin,
+      audience: `https://${domain}/api/v2/`,
+      scope: "read:current_user update:current_user_metadata"
+    }}
   >
-    <LoginButton />
-    <LogoutButton />
+  <AuthenticationButton/>
     <App />
-    
-   
-  </Auth0Provider>
+  </Auth0Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
