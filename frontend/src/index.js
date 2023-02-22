@@ -8,8 +8,8 @@ import LoginButton from './components/Auth/login';
 import LogoutButton from './components/Auth/logout';
 import Profile from './components/Auth/profile';
 
-const Domain = "dev-jpbr1n44ndkrn0x8.uk.auth0.com"
-const ClientID = "mEmTn9Wk2fMggtFZtJIK7VpN1yGMdAUt"
+const Domain = process.env.REACT_APP_AUTH0_DOMAIN
+const ClientID = process.env.REACT_APP_AUTH0_CLIENT_ID
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

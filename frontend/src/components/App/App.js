@@ -3,7 +3,6 @@ import Post from '../Post';
 import AddPost from '../AddPost';
 import moment from 'moment';
 
-
 export default function App() {
   const [ allposts, setAllposts] = useState([])
   
@@ -17,7 +16,6 @@ export default function App() {
       setAllposts(sortedPosts)
     } getPost()
   }, []);
-
 
 
   const addPost = async (post) => {
