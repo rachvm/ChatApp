@@ -25,7 +25,7 @@ export async function deletePost(post, reply){
      console.log(results);
      return results.acknowledged;
 }
-
+ 
 // export async function editPost(postContent, key) {
 //     const content = Object.values(postContent).toString()
 //     const editID = Object.values(key).toString()
