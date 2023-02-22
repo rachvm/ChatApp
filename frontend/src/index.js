@@ -3,11 +3,31 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from '../src/components/App/App.js';
 import reportWebVitals from './reportWebVitals';
+import { Auth0Provider } from "@auth0/auth0-react";
+import LoginButton from './components/Auth/login';
+import LogoutButton from './components/Auth/logout';
+import Profile from './components/Auth/profile';
+
+const Domain = "dev-jpbr1n44ndkrn0x8.uk.auth0.com"
+const ClientID = "mEmTn9Wk2fMggtFZtJIK7VpN1yGMdAUt"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.Fragment>
-    <App />
+    <Auth0Provider
+    domain={Domain}
+    clientId={ClientID}
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+      audience: `https://${Domain}/api/v2/`,
+      scope: "read:current_user update:current_user_metadata"
+    }}
+  >   
+      <LoginButton/>
+      <LogoutButton/>
+      <Profile/>
+      <App />
+    </Auth0Provider>
   </React.Fragment>
 );
 
