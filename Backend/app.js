@@ -2,6 +2,7 @@ import express from 'express'
 import logger from 'morgan'
 import cors from 'cors'
 import chatRouter from './routes/post.js'
+import replyRouter from './routes/replies.js'
 
 const app = express();
 const PORT = process.env.PORT

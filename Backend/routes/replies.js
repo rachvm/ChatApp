@@ -10,9 +10,10 @@ export default replyRouter
 //     res.json({ success: true, payload: note });
 // });
 
-replyRouter.delete("/:id", async function (req, res) {
-    const key = (req.params)
-    const note = await deletePost(key);
+replyRouter.delete("/:post/:reply", async function (req, res) {
+    const post = (req.params.post)
+    const reply = (req.params.reply)
+    const note = await deletePost(post, reply);
     res.json({note})
 });
 

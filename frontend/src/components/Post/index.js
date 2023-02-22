@@ -5,8 +5,8 @@ import { TrashIcon  } from "@heroicons/react/24/solid"
 import EditPost from "../Edit"
 // import Delete from "../DeletePost"
 
-export default function Post ( { name, post, array, created, postID, handleDeleteClick, handleEditPost, handleDelReplyClick } ) {
-    // console.log(postID);
+export default function Post ( { name, post, array, created, postID, handleDeleteClick, handleEditPost, handleDelClick } ) {
+    console.log(postID);
 
     const [comments, setComments] = useState(false)
 
@@ -31,7 +31,7 @@ export default function Post ( { name, post, array, created, postID, handleDelet
             {comments && (
                 <div>
                     {array.map((x) => (
-                <Reply key={x._id} replyID={x._id} name={x.name} surname={x.surname} reply={x.reply} created={created}/>
+                <Reply key={x._id} replyID={x._id} name={x.name} surname={x.surname} reply={x.reply} created={created} postID={postID} handleDelClick={handleDelClick}/>
             ))}
                 </div>
             )}

@@ -65,10 +65,10 @@ export default function App() {
 		setAllposts([...allposts.filter(object => { return object._id !== newpost._id}), newpost])
 	};
 
-  const delReply = async (replyID) => {
-    // alert("Delete" + id)
+  const delReply = async (postID, replyID) => {
+    alert("Delete" + postID + replyID)
 
-    await fetch(`http://localhost:3001/api/chat/reply/${replyID}`, {
+    await fetch(`http://localhost:3001/api/chat/reply/${replyID}/${postID}`, {
       method: 'DELETE',
 
 		})
@@ -83,7 +83,7 @@ export default function App() {
         <AddPost handleAddPost={addPost}/>
         
         {allposts.map((x) => (
-          <Post key={x._id} postID={x._id} name={x.name} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost} handleEditPost={editPost} handleDelReplyClick={delReply}/>
+          <Post key={x._id} postID={x._id} name={x.name} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost} handleEditPost={editPost} handleDelClick={delReply}/>
         ))}
 
       </div>
