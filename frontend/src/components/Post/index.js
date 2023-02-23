@@ -5,7 +5,7 @@ import { TrashIcon  } from "@heroicons/react/24/solid"
 import EditPost from "../Edit"
 // import Delete from "../DeletePost"
 
-export default function Post ( { name, post, array, created, postID, handleDeleteClick, handleEditPost, handleDelClick } ) {
+export default function Post ( { name, surname, post, array, created, postID, handleDeleteClick, handleEditPost, handleDelClick } ) {
     console.log(postID);
 
     const [comments, setComments] = useState(false)
@@ -18,7 +18,7 @@ export default function Post ( { name, post, array, created, postID, handleDelet
     return(
         <div className="mt-8 p-8 border-solid border-2 border-yellow-400 bg-black rounded-md font-sans">
             <p className="text-right text-lg text-white">{created}</p>
-            <p className="text-left text-lg text-white font-medium">{name}</p>
+            <p className="text-left text-lg text-white font-medium">{name} {surname}</p>
             <p className="text-center text-2xl text-amber-200 font-medium">{post}</p>
             
             <div className="flex justify-end">

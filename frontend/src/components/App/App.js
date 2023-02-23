@@ -3,7 +3,6 @@ import Post from '../Post';
 import AddPost from '../AddPost';
 import moment from 'moment';
 
-
 export default function App() {
   const [ allposts, setAllposts] = useState([])
   
@@ -19,11 +18,15 @@ export default function App() {
   }, []);
 
 
-
-  const addPost = async (post) => {
+  const addPost = async (post, userMetadata) => {
+    console.log(userMetadata);
+    const name = userMetadata.name
+    const surname = userMetadata.surname
+    console.log(surname);
     const date = moment().format("DD-MM-YYYY")
     const text = {
-      name: "Julie Edwards",
+      name: name,
+      surname: surname, 
       post: post,
       created: date,
      
@@ -68,11 +71,16 @@ export default function App() {
   const delReply = async (postID, replyID) => {
     alert("Delete" + postID + replyID)
 
-    await fetch(`http://localhost:3001/api/chat/reply/${replyID}/${postID}`, {
+    const response = await fetch(`http://localhost:3001/api/chat/reply/${replyID}/${postID}`, {
       method: 'DELETE',
 
 		})
-    // setAllposts(allposts.filter((allposts)=> allposts._id !== replyID))
+    const data = await response.json()
+    const newpost = data.payload
+    const postArray = [...allposts.filter(object => { return object._id !== newpost._id}), newpost]
+    let sortedPosts = postArray.sort((a, b) =>
+          a.created.split('-').reverse().join().localeCompare(b.created.split('-').reverse().join()));
+    setAllposts(sortedPosts)
   }
 
   return (
@@ -83,7 +91,7 @@ export default function App() {
         <AddPost handleAddPost={addPost}/>
         
         {allposts.map((x) => (
-          <Post key={x._id} postID={x._id} name={x.name} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost} handleEditPost={editPost} handleDelClick={delReply}/>
+          <Post key={x._id} postID={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost} handleEditPost={editPost} handleDelClick={delReply}/>
         ))}
 
       </div>

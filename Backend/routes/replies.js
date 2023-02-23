@@ -1,5 +1,5 @@
 import express from 'express';
-import { deletePost } from '../models/replies.js';
+import { deleteReply } from '../models/replies.js';
 
 const replyRouter = express.Router();
 export default replyRouter
@@ -13,8 +13,8 @@ export default replyRouter
 replyRouter.delete("/:post/:reply", async function (req, res) {
     const post = (req.params.post)
     const reply = (req.params.reply)
-    const note = await deletePost(post, reply);
-    res.json({note})
+    const note = await deleteReply(post, reply);
+    res.json({ success: true, payload: note });
 });
 
 // replyRouter.patch("/:id", async function (req, res) {
