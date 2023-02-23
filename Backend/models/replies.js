@@ -17,13 +17,19 @@ const collection = database.collection('chat');
 //     return newPost 
 // }
 
-export async function deletePost(post, reply){
-    console.log(typeof post);
-    const message = collection.deleteOne(
-        {_id: ObjectId(post)}, {$pull: {replies: {_id: ObjectId(reply)}}})
-     const results = await message;
-     console.log(results);
-     return results.acknowledged;
+export async function deleteReply(reply, post){
+    // console.log("post" + post);
+    // console.log("reply" + reply);
+    const message = await collection.updateOne(
+        {_id : ObjectId(post)}, {
+            $pull:{
+                replies: {_id : ObjectId(reply)}
+            }
+        }
+    )
+    const newPost = await collection.findOne({_id : ObjectId(post)});
+    // console.log(newPost);
+    return newPost 
 }
 
 // export async function editPost(postContent, key) {
