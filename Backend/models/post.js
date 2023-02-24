@@ -35,7 +35,6 @@ export async function editPost(postContent, key) {
     const message = await collection
          .updateOne({_id : ObjectId(editID)},
                     {$set:{post : content}})
-    const newPost = await collection.findOne({_id : ObjectId(editID)});
-    console.log(newPost);
+    const newPost = message;
     return newPost 
 }

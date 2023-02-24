@@ -9,17 +9,16 @@ const database = client.db('gettogether');
 const collection = database.collection('chat');
 
 
-// export async function addReply(postContent) {
-//     const message = collection.insertOne(postContent)
-//     const results = await message
-//     const findId = results.insertedId
-//     const newPost = await collection.findOne({_id: findId});
-//     return newPost 
-// }
+export async function addReply(replyContent, postid) {
+    replyContent._id = new ObjectId
+    const message = await collection.updateOne(
+        {_id : ObjectId(postid)}, 
+        {$addToSet: {replies:replyContent}},
+        { upsert: true });
+    return message.acknowledged
+}
 
 export async function deleteReply(reply, post){
-    // console.log("post" + post);
-    // console.log("reply" + reply);
     const message = await collection.updateOne(
         {_id : ObjectId(post)}, {
             $pull:{
@@ -28,7 +27,6 @@ export async function deleteReply(reply, post){
         }
     )
     const newPost = await collection.findOne({_id : ObjectId(post)});
-    // console.log(newPost);
     return newPost 
 }
 
