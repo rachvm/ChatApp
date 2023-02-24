@@ -69,7 +69,7 @@ export default function App() {
 	};
 
   const delReply = async (postID, replyID) => {
-    alert("Delete" + postID + replyID)
+    // alert("Delete" + postID + replyID)
 
     const response = await fetch(`http://localhost:3001/api/chat/reply/${replyID}/${postID}`, {
       method: 'DELETE',
@@ -83,17 +83,38 @@ export default function App() {
     setAllposts(sortedPosts)
   }
 
+  const addReply = async (reply, user, postID) => {
+    const name = user.name
+    const surname = user.surname
+    const date = moment().format("DD-MM-YYYY")
+    const text = {
+      name: name,
+      surname: surname, 
+      reply: reply,
+      created: date,
+     
+  };
+		const response = await fetch(`http://localhost:3001/api/chat/reply/${postID}`, {
+			method: 'POST',
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(text),
+		})
+    console.log(response);
+		window.location.reload(false);
+    
+  }
+
   return (
     <div>
       <header className="p-4 pl-4 text-right text-yellow-400 text-5xl font-bold"> GetTogether </header>
       <div className="flex flex-col w-4/6 m-auto">
         
         <AddPost handleAddPost={addPost}/>
-        
+      
         {allposts.map((x) => (
-          <Post key={x._id} postID={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost} handleEditPost={editPost} handleDelClick={delReply}/>
+          <Post key={x._id} postID={x._id} name={x.name} surname={x.surname} post={x.post} created={x.created} array={x.replies} handleDeleteClick={deletePost} handleEditPost={editPost} handleDelClick={delReply} handleAddReply={addReply}/>
         ))}
-
+      
       </div>
     </div>
   );

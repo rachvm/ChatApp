@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import { Auth0Provider } from "@auth0/auth0-react";
 import LoginButton from './components/Auth/login';
 import LogoutButton from './components/Auth/logout';
-import Profile from './components/Auth/profile';
 
 const Domain = process.env.REACT_APP_AUTH0_DOMAIN
 const ClientID = process.env.REACT_APP_AUTH0_CLIENT_ID
@@ -25,7 +24,6 @@ root.render(
   >   
       <LoginButton/>
       <LogoutButton/>
-      <Profile/>
       <App />
     </Auth0Provider>
   </React.Fragment>

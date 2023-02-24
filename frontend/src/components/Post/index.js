@@ -1,20 +1,29 @@
 import React from "react"
 import Reply from "../Replies"
 import  { useState } from 'react'
-import { TrashIcon  } from "@heroicons/react/24/solid"
+import { TrashIcon } from "@heroicons/react/24/solid"
 import EditPost from "../Edit"
+import AddReply from "../AddReply"
 // import Delete from "../DeletePost"
 
-export default function Post ( { name, surname, post, array, created, postID, handleDeleteClick, handleEditPost, handleDelClick } ) {
-    console.log(postID);
-
+export default function Post ( { name, surname, post, array, created, postID, handleDeleteClick, handleEditPost, handleDelClick, handleAddReply } ) {
+    // console.log(postID);
+   
     const [comments, setComments] = useState(false)
 
     const handleClick = () => {
         handleDeleteClick(postID)
-        // console.log(postID);
-        
+        // console.log(postID);  
     }
+
+    // const handleReplyClick = () => {
+    //     if (array === undefined) {
+    //         alert("add reply")
+    //     }
+    //     else {setComments(!comments)}
+    // }
+
+            
     return(
         <div className="mt-8 p-8 border-solid border-2 border-yellow-400 bg-black rounded-md font-sans">
             <p className="text-right text-lg text-white">{created}</p>
@@ -27,7 +36,9 @@ export default function Post ( { name, surname, post, array, created, postID, ha
             
             </div>
 
-            <button className="bg-amber-400 hover:opacity-50 p-1 rounded-md font-medium text-bold" onClick={() => setComments(!comments)}>Read Comments</button>
+            <button className="bg-amber-400 hover:opacity-50 p-1 rounded-md font-medium text-bold" onClick={() => (array === undefined) ? <></>
+            : setComments(!comments)}
+        >Replies</button>
             {comments && (
                 <div>
                     {array.map((x) => (
@@ -35,8 +46,10 @@ export default function Post ( { name, surname, post, array, created, postID, ha
             ))}
                 </div>
             )}
+            <div className="flex justify-end">
             
-            
+            <AddReply handleAddReply={handleAddReply} postID={postID}/>
+            </div>
         </div>
          
 
