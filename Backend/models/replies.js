@@ -15,7 +15,8 @@ export async function addReply(replyContent, postid) {
         {_id : ObjectId(postid)}, 
         {$addToSet: {replies:replyContent}},
         { upsert: true });
-    return message.acknowledged
+
+    return message
 }
 
 export async function deleteReply(reply, post){

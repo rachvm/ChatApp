@@ -83,10 +83,11 @@ export default function App() {
     setAllposts(sortedPosts)
   }
 
-  const addReply = async (reply, user, postID) => {
-    const name = user.name
-    const surname = user.surname
+  const addReply = async (postID, reply, user) => {
+    const name = await user.name
+    const surname = await user.surname
     const date = moment().format("DD-MM-YYYY")
+    console.log(date)
     const text = {
       name: name,
       surname: surname, 
@@ -94,6 +95,7 @@ export default function App() {
       created: date,
      
   };
+  console.log(text.created);
 		const response = await fetch(`http://localhost:3001/api/chat/reply/${postID}`, {
 			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
@@ -101,6 +103,7 @@ export default function App() {
 		})
     console.log(response);
 		window.location.reload(false);
+    //I have tried $elemmatch, findandupdate, and when I try to retrieve the post with the new reply to update it hasn't updated so I am refreshing the page until I find a solution to this.
     
   }
 

@@ -9,14 +9,14 @@ replyRouter.post("/:id", async function (req, res) {
     const postid = req.params.id
     // console.log(replyContent);
     const note = await addReply(replyContent, postid);
-    console.log( note);
-    res.json({ note });
+    console.log("note" + note);
+    res.json({note});
 });
 
 replyRouter.delete("/:post/:reply", async function (req, res) {
     const post = (req.params.post)
     const reply = (req.params.reply)
-    // console.log(reply);
+    console.log(reply.created);
     const note = await deleteReply(post, reply);
     res.json({ success: true, payload: note });
 });

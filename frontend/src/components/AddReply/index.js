@@ -2,48 +2,55 @@ import { PlusCircleIcon } from "@heroicons/react/24/solid"
 import React from "react";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from '../Auth/login.js'
 
 export default function AddReply({postID, handleAddReply} ) {
     const [showModal, setShowModal] = useState(false);
     const [reply, setReply] = useState("")
     const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const [userMetadata, setUserMetadata] = useState(null);
-  
+ 
     const handleClick = async() => {
+
+           
       const domain = process.env.REACT_APP_AUTH0_DOMAIN;
     
-        try {
+      
           const accessToken = await getAccessTokenSilently({
             authorizationParams: {
               audience: `https://${domain}/api/v2/`,
               scope: "read:current_user",
             },
           });
+          console.log("accessToken" + accessToken);
     
           const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-    
+          
           const metadataResponse = await fetch(userDetailsByIdUrl, {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
           });
-    
+    console.log("meta" + metadataResponse);
           const { user_metadata } = await metadataResponse.json();
-    
+ 
           setUserMetadata(user_metadata);
-        } catch (e) {
-          console.log(e.message);
-        }
+        console.log("user" + user_metadata);
      
-      handleAddReply(reply, userMetadata, postID);
+       
+      handleAddReply(postID, reply, userMetadata)
       setShowModal(false)
     }
   
+
+    
+
+
     return (<>
         <div  >
        
              
-    <PlusCircleIcon onClick={() =>  {isAuthenticated ? (setShowModal(true) ) : (alert("Please log into your account to send a post"))}} className="h-6 w-6 text-amber-400 hover:opacity-50" />
+    <PlusCircleIcon onClick={() =>  {isAuthenticated ? (setShowModal(true) ) : (<LoginButton/>)}} className="h-6 w-6 text-amber-400 hover:opacity-50" />
     </div>
 
       {showModal ? (

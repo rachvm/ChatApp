@@ -1,11 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { PencilIcon  } from "@heroicons/react/24/solid"
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 export default function EditPost( {oldpost, updateid, handleEditPost} ) {
   const [showModal, setShowModal] = useState(false);
   const [post, setPost] = useState("")
+  const { isAuthenticated } = useAuth0();
 
   const handleClick =() => {
     handleEditPost(post, updateid);
@@ -14,10 +16,10 @@ export default function EditPost( {oldpost, updateid, handleEditPost} ) {
 
   return (
     <>
-
+  {isAuthenticated ? (
     <PencilIcon className="h-6 w-6 mr-2 text-amber-400 hover:opacity-50" 
         onClick={() => setShowModal(true)}
-      />
+      />): (<PencilIcon className="h-6 w-6 mr-2 text-amber-400 hover:opacity-50"/>)}
 
 
       {showModal ? (
@@ -95,11 +97,6 @@ export default function EditPost( {oldpost, updateid, handleEditPost} ) {
   );
 }  
    
-        //on click button to display form modal to input new post 
-        // create form with inputs for name, surname, post, author_id, created
-        // set up states for all the above inputs,  and have event targets on all of these
-        // set up for onclick for all states to be updated and handed into a function
-        // pass the functions to add post 
 
         
 

@@ -1,7 +1,8 @@
 import { TrashIcon  } from "@heroicons/react/24/solid"
+import { useAuth0 } from "@auth0/auth0-react"
 
-export default function Reply ( { name, surname, reply, created, replyID, postID, handleDelClick } ) {
-        
+export default function Reply ( { name, surname, reply, created, replyID, postID, handleDelClick } ) {  
+    const { isAuthenticated } = useAuth0
     const handleClick = () => {
         handleDelClick(postID, replyID) 
     }
@@ -15,7 +16,9 @@ export default function Reply ( { name, surname, reply, created, replyID, postID
             
             <div className="flex justify-end">
             
-            <TrashIcon onClick={handleClick} className="h-6 w-6 text-black hover:opacity-50" />
+            {isAuthenticated ? 
+            (<TrashIcon onClick={handleClick} className="h-6 w-6 text-black hover:opacity-50" />) :
+            (<TrashIcon className="h-6 w-6 text-black hover:opacity-50" />)}
             
             </div>
             </div>

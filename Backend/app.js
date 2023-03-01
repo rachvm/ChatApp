@@ -11,9 +11,11 @@ app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use("/api/chat", chatRouter);
-app.use("/api/chat/reply", replyRouter);
+// app.use("/api/chat/reply", replyRouter);
 
 
 app.listen(PORT, function () {
   console.log(`Server is running on port ${PORT}`);
 });
+
+export default app
